@@ -1,0 +1,43 @@
+import { Component, OnInit } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+
+
+import {Todo} from "./todo";
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+
+
+export class AppComponent implements OnInit{
+  title = 'angular-project';
+  
+  todoValue: string = '';
+  list: Todo[] = [];
+
+  ngOnInit(){
+    this.list = [];
+    this.todoValue = "";
+  }
+
+  addItem(){
+    if(this.todoValue !== ""){
+      const newItem: Todo = {
+        id:Date.now(),
+        value: this.todoValue,
+        isDone: false
+      };
+      this.list.push(newItem);
+    }
+    this.todoValue = "";
+  }
+
+  deleteItem(id:number){
+    this.list = this.list.filter(item => item.id !== id);
+  }
+}
+
+
